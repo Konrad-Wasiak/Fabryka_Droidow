@@ -1,5 +1,6 @@
 import csv
 from typing import List
+from log import log_message
 
 class Batch:
     def __init__(self, nazwa: str, numer_produkcji: int, ilosc_droidow: int, umiejetnosci_specjalne: List[str], wersja_oprogramowania: str, rodzaj_klasy: str, kolor: str):
@@ -13,18 +14,21 @@ class Batch:
     def szkol_droidy(self, nowa_umiejetnosc: str) -> None:
         if nowa_umiejetnosc not in self.umiejetnosci_specjalne:
             self.umiejetnosci_specjalne.append(nowa_umiejetnosc)
+            log_message(f"Umiejętność {nowa_umiejetnosc} została dodana do droidów w batchu {self.nazwa}.")
             print(f"Umiejętność {nowa_umiejetnosc} została dodana do droidów w batchu {self.nazwa}.")
         else:
             print(f"Umiejętność {nowa_umiejetnosc} już istnieje w batchu {self.nazwa}.")
+            log_message(f"Umiejętność {nowa_umiejetnosc} już istnieje w batchu {self.nazwa}.")
 
     def maluj_droidy(self, nowy_kolor: str) -> None:
         self.kolor = nowy_kolor
         print(f"Droidy w batchu {self.nazwa} zostały pomalowane na kolor {nowy_kolor}.")
+        log_message(f"Droidy w batchu {self.nazwa} zostały pomalowane na kolor {nowy_kolor}.")
 
     def updatuj_software(self, nowa_wersja_oprogramowania: str) -> None:
         self.wersja_oprogramowania = nowa_wersja_oprogramowania
-        print(
-            f"Wersja oprogramowania droidów w batchu {self.nazwa} została zaktualizowana do {nowa_wersja_oprogramowania}.")
+        print( f"Wersja oprogramowania droidów w batchu {self.nazwa} została zaktualizowana do {nowa_wersja_oprogramowania}.")
+        log_message( f"Wersja oprogramowania droidów w batchu {self.nazwa} została zaktualizowana do {nowa_wersja_oprogramowania}.")
 
     @classmethod
     def stworz_nowy_batch(cls):
@@ -74,10 +78,12 @@ class Batch:
                 cls.zapisz_do_csv(nowy_batch)
                 
                 print(f"Batch został dodany do bazy danych.")
-                
+                log_message(f"Batch został dodany do bazy danych.")
+
                 return nowy_batch
             except ValueError as e:
                 print(f"Błąd: {e}. Spróbuj ponownie.")
+                log_message(f"Błąd: {e}. Spróbuj ponownie.")
 
     @staticmethod
     def zapisz_do_csv(batch):
@@ -92,6 +98,7 @@ class Batch:
                 batch.kolor
             ])
         print(f"Zapisano batch {batch.nazwa} do pliku CSV.")
+        log_message(f"Zapisano batch {batch.nazwa} do pliku CSV.")
 
     @staticmethod
     def wczytaj_z_csv():
@@ -102,6 +109,7 @@ class Batch:
                 for row in reader:
                     if len(row) != 6:
                         print(f"Niepoprawny wiersz w pliku CSV: {row}")
+                        log_message(f"Niepoprawny wiersz w pliku CSV: {row}")
                         continue
                     nazwa, ilosc_droidow, umiejetnosci_specjalne, wersja_oprogramowania, rodzaj_klasy, kolor = row
                     try:
@@ -120,9 +128,12 @@ class Batch:
                         batchy.append(batch)
                     except ValueError as e:
                         print(f"Błąd podczas przetwarzania wiersza: {row}. Błąd: {e}")
+                        log_message(f"Błąd podczas przetwarzania wiersza: {row}. Błąd: {e}")
         except FileNotFoundError:
             print("Plik batche.csv nie został znaleziony. Zostanie utworzony nowy plik przy pierwszym zapisie.")
+            log_message("Plik batche.csv nie został znaleziony. Zostanie utworzony nowy plik przy pierwszym zapisie.")
         print(f"Wczytano {len(batchy)} batchy z pliku CSV.")
+        log_message(f"Wczytano {len(batchy)} batchy z pliku CSV.")
         return batchy
 
 # Przykład użycia:
@@ -130,8 +141,10 @@ if __name__ == "__main__":
     batchy = Batch.wczytaj_z_csv()
     print(f"Wczytano batchy: {len(batchy)}")
     for batch in batchy:
+        log_message(f"Batch: {batch.nazwa}, ilość droidów: {batch.ilosc_droidow}, umiejętności: {', '.join(batch.umiejetnosci_specjalne)}, wersja oprogramowania: {batch.wersja_oprogramowania}, rodzaj klasy: {batch.rodzaj_klasy}, kolor: {batch.kolor}")
         print(f"Batch: {batch.nazwa}, ilość droidów: {batch.ilosc_droidow}, umiejętności: {', '.join(batch.umiejetnosci_specjalne)}, wersja oprogramowania: {batch.wersja_oprogramowania}, rodzaj klasy: {batch.rodzaj_klasy}, kolor: {batch.kolor}")
     
     nowy_batch = Batch.stworz_nowy_batch()
     print(f"Utworzono batch: {nowy_batch.nazwa}, ilość droidów: {nowy_batch.ilosc_droidow}, umiejętności: {', '.join(nowy_batch.umiejetnosci_specjalne)}, wersja oprogramowania: {nowy_batch.wersja_oprogramowania}, rodzaj klasy: {nowy_batch.rodzaj_klasy}, kolor: {nowy_batch.kolor}")
+    log_message(f"Utworzono batch: {nowy_batch.nazwa}, ilość droidów: {nowy_batch.ilosc_droidow}, umiejętności: {', '.join(nowy_batch.umiejetnosci_specjalne)}, wersja oprogramowania: {nowy_batch.wersja_oprogramowania}, rodzaj klasy: {nowy_batch.rodzaj_klasy}, kolor: {nowy_batch.kolor}")
 

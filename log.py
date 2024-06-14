@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 # Funkcja logująca
-def log_message(message, batch_number):
+def log_message(message):
     log_file = 'log.csv'
 
     # Pobierz aktualną datę i czas
@@ -30,7 +30,7 @@ def log_message(message, batch_number):
         user_time = now
 
     # Stwórz DataFrame z nowym wpisem
-    new_log = pd.DataFrame([[user_time, batch_number, message]], columns=['Time', 'Batch', 'Message'])
+    new_log = pd.DataFrame([[user_time, message]], columns=['Time', 'Message'])
 
     try:
         # Wczytaj istniejący plik logu, jeśli istnieje
@@ -48,15 +48,3 @@ def log_message(message, batch_number):
     updated_log.to_csv(log_file, index=False)
     print("Log został zaktualizowany.")
 
-
-# Przykładowa funkcja używająca log_message
-def szkol_droidy(batch):
-    batch_number = batch.get('number', 'brak numeru')
-    message = f"Wysłano batch o numerze {batch_number} na szkolenie x."
-    log_message(message, batch_number)
-
-
-# Przykładowe wywołanie funkcji szkol_droidy
-if __name__ == "__main__":
-    example_batch = {'number': 123}
-    szkol_droidy(example_batch)

@@ -1,4 +1,10 @@
 Time,Batch,Message
-2012-07-17 12:00:00,123,Wysłano batch o numerze 123 na szkolenie x.
-2024-06-14 15:27:52,123,Wysłano batch o numerze 123 na szkolenie x.
-2024-06-14 19:41:18,123,Wysłano batch o numerze 123 na szkolenie x.
+2024-06-14 20:40:32,,"Batch: oddzial_1, ilość droidów: 105, umiejętności: spryt, wersja oprogramowania: 1beta, rodzaj klasy: defender, kolor: zolty"
+2024-06-14 20:40:39,,"Batch: dywizja_5, ilość droidów: 250, umiejętności: walka, inteligencja, wersja oprogramowania: 5gamma, rodzaj klasy: attacker, kolor: czarny"
+2024-06-14 20:46:20,,Niepoprawny wiersz w pliku CSV: []
+2024-06-14 20:46:24,,Wczytano 3 batchy z pliku CSV.
+2024-06-14 20:46:25,,"Batch: oddzial_1, ilość droidów: 105, umiejętności: spryt, wersja oprogramowania: 1beta, rodzaj klasy: defender, kolor: zolty"
+2024-06-14 20:46:26,,"Batch: dywizja_5, ilość droidów: 250, umiejętności: walka, inteligencja, wersja oprogramowania: 5gamma, rodzaj klasy: attacker, kolor: czarny"
+2024-06-14 20:46:26,,"Batch: pancerz_23, ilość droidów: 232, umiejętności: bieganie, wersja oprogramowania: 123, rodzaj klasy: attacker, kolor: czarny"
+2024-06-14 20:46:29,,Błąd: Numer produkcji powinien być liczbą całkowitą.. Spróbuj ponownie.
+2024-06-14 20:46:30,,Błąd: Numer produkcji powinien być liczbą całkowitą.. Spróbuj ponownie.

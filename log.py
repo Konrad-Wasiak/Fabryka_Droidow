@@ -47,4 +47,3 @@ def log_message(message):
     # Zapisz log do pliku CSV
     updated_log.to_csv(log_file, index=False)
     print("Log został zaktualizowany.")
-

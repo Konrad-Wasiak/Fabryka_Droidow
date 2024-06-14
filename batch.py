@@ -14,6 +14,7 @@ class Batch:
         self.rodzaj_klasy: str = rodzaj_klasy
         self.kolor: str = kolor
 
+    # Funkcja szkoląca droidy.
     def szkol_droidy(self, nowa_umiejetnosc: str) -> None:
         if nowa_umiejetnosc not in self.umiejetnosci_specjalne:
             self.umiejetnosci_specjalne.append(nowa_umiejetnosc)
@@ -23,52 +24,54 @@ class Batch:
             print(f"Umiejętność {nowa_umiejetnosc} już istnieje w batchu {self.nazwa}.")
             log_message(f"Umiejętność {nowa_umiejetnosc} już istnieje w batchu {self.nazwa}.")
 
+    # Funkcja malująca droidy.
     def maluj_droidy(self, nowy_kolor: str) -> None:
         self.kolor = nowy_kolor
         print(f"Droidy w batchu {self.nazwa} zostały pomalowane na kolor {nowy_kolor}.")
         log_message(f"Droidy w batchu {self.nazwa} zostały pomalowane na kolor {nowy_kolor}.")
 
+    # Funkcja odpowiedzialna za aktualizajcę software'u.
     def updatuj_software(self, nowa_wersja_oprogramowania: str) -> None:
         self.wersja_oprogramowania = nowa_wersja_oprogramowania
         print( f"Wersja oprogramowania droidów w batchu {self.nazwa} została zaktualizowana do {nowa_wersja_oprogramowania}.")
         log_message( f"Wersja oprogramowania droidów w batchu {self.nazwa} została zaktualizowana do {nowa_wersja_oprogramowania}.")
 
+    # Funkcja dodająca nowy batch.
     @classmethod
     def stworz_nowy_batch(cls):
-        while True:
-            try:
-                nazwa = input("Podaj nazwę batcha: ")
-                if not nazwa.isalnum():
-                    raise ValueError("Nazwa batcha powinna składać się z liter i cyfr bez znaków specjalnych.")
+        try:
+            nazwa = input("Podaj nazwę batcha: ")
+            if not nazwa.isalnum():
+                raise ValueError("Nazwa batcha powinna składać się z liter i cyfr bez znaków specjalnych.")
 
-                numer_produkcji = input("Podaj numer produkcji: ")
-                if not numer_produkcji.isdigit():
-                    raise ValueError("Numer produkcji powinien być liczbą całkowitą.")
-                numer_produkcji = int(numer_produkcji)
+            numer_produkcji = input("Podaj numer produkcji: ")
+            if not numer_produkcji.isdigit():
+                raise ValueError("Numer produkcji powinien być liczbą całkowitą.")
+            numer_produkcji = int(numer_produkcji)
 
-                ilosc_droidow = input("Podaj ilość droidów: ")
-                if not ilosc_droidow.isdigit():
-                    raise ValueError("Ilość droidów powinna być liczbą całkowitą.")
-                ilosc_droidow = int(ilosc_droidow)
+            ilosc_droidow = input("Podaj ilość droidów: ")
+            if not ilosc_droidow.isdigit():
+                raise ValueError("Ilość droidów powinna być liczbą całkowitą.")
+            ilosc_droidow = int(ilosc_droidow)
 
-                umiejetnosci_specjalne = input("Podaj umiejętności specjalne (oddzielone przecinkami): ").split(',')
-                if not all(umiejetnosc.strip().isalpha() for umiejetnosc in umiejetnosci_specjalne):
-                    raise ValueError(
-                        "Umiejętności specjalne powinny być ciągami znaków składającymi się wyłącznie z liter.")
+            umiejetnosci_specjalne = input("Podaj umiejętności specjalne (oddzielone przecinkami): ").split(',')
+            if not all(umiejetnosc.strip().isalpha() for umiejetnosc in umiejetnosci_specjalne):
+                raise ValueError(
+                    "Umiejętności specjalne powinny być ciągami znaków składającymi się wyłącznie z liter.")
 
-                wersja_oprogramowania = input("Podaj wersję oprogramowania: ")
-                if not wersja_oprogramowania.isalnum():
-                    raise ValueError("Wersja oprogramowania powinna składać się z liter i cyfr bez znaków specjalnych.")
+            wersja_oprogramowania = input("Podaj wersję oprogramowania: ")
+            if not wersja_oprogramowania.isalnum():
+                raise ValueError("Wersja oprogramowania powinna składać się z liter i cyfr bez znaków specjalnych.")
 
-                rodzaj_klasy = input("Podaj rodzaj klasy: ")
-                if not rodzaj_klasy.isalpha():
-                    raise ValueError("Rodzaj klasy powinien składać się z liter bez znaków specjalnych.")
+            rodzaj_klasy = input("Podaj rodzaj klasy: ")
+            if not rodzaj_klasy.isalpha():
+                raise ValueError("Rodzaj klasy powinien składać się z liter bez znaków specjalnych.")
 
-                kolor = input("Podaj kolor: ")
-                if not kolor.isalpha():
-                    raise ValueError("Kolor powinien składać się z liter bez znaków specjalnych.")
+            kolor = input("Podaj kolor: ")
+            if not kolor.isalpha():
+                raise ValueError("Kolor powinien składać się z liter bez znaków specjalnych.")
 
-                nowy_batch = cls(
+            nowy_batch = cls(
                     nazwa=nazwa,
                     numer_produkcji=numer_produkcji,
                     ilosc_droidow=ilosc_droidow,
@@ -78,15 +81,14 @@ class Batch:
                     kolor=kolor
                 )
 
-                cls.zapisz_do_csv(nowy_batch)
+            cls.zapisz_do_csv(nowy_batch)
 
-                print(f"Batch został dodany do bazy danych.")
-                log_message(f"Batch został dodany do bazy danych.")
+            print(f"Batch został dodany do bazy danych.")
+            log_message(f"Batch został dodany do bazy danych.")
 
-                return nowy_batch
-            except ValueError as e:
-                print(f"Błąd: {e}. Spróbuj ponownie.")
-                log_message(f"Błąd: {e}. Spróbuj ponownie.")
+            return nowy_batch
+        except ValueError as e:
+            print(f"Błąd: {e}. Spróbuj ponownie.")
 
     @staticmethod
     def zapisz_do_csv(batch):
@@ -156,18 +158,3 @@ class Batch:
         df = pd.DataFrame(data)
         df.to_csv('magazyn.csv', index=False)
         print(df)
-
-
-# Przykład użycia:
-if __name__ == "__main__":
-    Batch.pokaz_magazyn()
-    batchy = Batch.wczytaj_z_csv()
-    print(f"Wczytano batchy: {len(batchy)}")
-    for batch in batchy:
-        log_message(f"Batch: {batch.nazwa}, ilość droidów: {batch.ilosc_droidow}, umiejętności: {', '.join(batch.umiejetnosci_specjalne)}, wersja oprogramowania: {batch.wersja_oprogramowania}, rodzaj klasy: {batch.rodzaj_klasy}, kolor: {batch.kolor}")
-        print(f"Batch: {batch.nazwa}, ilość droidów: {batch.ilosc_droidow}, umiejętności: {', '.join(batch.umiejetnosci_specjalne)}, wersja oprogramowania: {batch.wersja_oprogramowania}, rodzaj klasy: {batch.rodzaj_klasy}, kolor: {batch.kolor}")
-    
-    nowy_batch = Batch.stworz_nowy_batch()
-    print(f"Utworzono batch: {nowy_batch.nazwa}, ilość droidów: {nowy_batch.ilosc_droidow}, umiejętności: {', '.join(nowy_batch.umiejetnosci_specjalne)}, wersja oprogramowania: {nowy_batch.wersja_oprogramowania}, rodzaj klasy: {nowy_batch.rodzaj_klasy}, kolor: {nowy_batch.kolor}")
-    log_message(f"Utworzono batch: {nowy_batch.nazwa}, ilość droidów: {nowy_batch.ilosc_droidow}, umiejętności: {', '.join(nowy_batch.umiejetnosci_specjalne)}, wersja oprogramowania: {nowy_batch.wersja_oprogramowania}, rodzaj klasy: {nowy_batch.rodzaj_klasy}, kolor: {nowy_batch.kolor}")
-

@@ -71,23 +71,26 @@ def main():
         wyswietl_menu()
         wybor = input("Wybierz opcję (1-7): ")
 
-        if wybor == '1':
-            dodaj_nowy_batch(batchy)
-        elif wybor == '2':
-            maluj_batch(batchy)
-        elif wybor == '3':
-            szkol_batch(batchy)
-        elif wybor == '4':
-            wyswietl_log()
-        elif wybor == '5':
-            dodaj_do_logu()
-        elif wybor == '6':
-            wyswietl_stan_magazynu(batchy)
-        elif wybor == '7':
-            print("Dziękujemy za skorzystanie z aplikacji. Do widzenia!")
-            sys.exit()
-        else:
-            print("Nieprawidłowy wybór, spróbuj ponownie.")
+        try:
+            if wybor == '1':
+                dodaj_nowy_batch(batchy)
+            elif wybor == '2':
+                maluj_batch(batchy)
+            elif wybor == '3':
+                szkol_batch(batchy)
+            elif wybor == '4':
+                wyswietl_log()
+            elif wybor == '5':
+                dodaj_do_logu()
+            elif wybor == '6':
+                wyswietl_stan_magazynu(batchy)
+            elif wybor == '7':
+                print("Dziękujemy za skorzystanie z aplikacji. Do widzenia!")
+                sys.exit()
+            else:
+                print("Nieprawidłowy wybór, spróbuj ponownie.")
+        except:
+            continue
 
 
 if __name__ == "__main__":

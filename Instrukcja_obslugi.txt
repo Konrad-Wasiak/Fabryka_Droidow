@@ -1,0 +1,24 @@
+Drogi Kliencie,
+
+Poniżej znajduje się instrukcja korzystania z aplikacji szkolącej droidy.
+Po uruchomieniu, aplikacja oferuje użytkownikowi wybór możliwości poprzez wpisanie numeru odpowiadającego danej opcji.
+Prezentuje się to następująco:
+
+1. Dodanie nowego batcha
+2. Pomalowanie batcha
+3. Szkolenie batcha
+4. Wyświetlenie logu
+5. Dodanie czegoś do logu
+6. Wyświetlenie stanu magazynu
+7. Wyjście z aplikacji
+
+W przypadku niepowodzenia, aplikacja wyświetli to menu ponownie.
+Aplikacja rejestruje każdą interakcję z systemem w pliku log.csv. Plik ten można wyświetlić w konsoli, wybierając opcję numer 4.
+Do logu można dodać datę wykonania operacji, pobieraną automatycznie, lub dodać własną (np. historyczną).
+
+W przypadku chęci wyświetlenia stanu magazynu, można to zrobić w konsoli, jednak dla przejrzystości polecamy przegląd pliku w wybranym eksploratorze.
+
+Wszystkie pozostałe instrukcje przekazuje aplikacja. 
+
+Powodzenia i dziękujęmy za skorzystanie z usług naszej firmy!
+Konrad Wasiak, PO

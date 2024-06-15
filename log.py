@@ -11,7 +11,7 @@ def log_message(message):
 
     # Zapytaj użytkownika, czy chce użyć aktualnego czasu, czy wprowadzić własny
     while True:
-        use_current_time = input("Czy chcesz użyć aktualnego czasu? (tak/nie): ").strip().lower()
+        use_current_time = input("Generowanie logu:\nCzy chcesz użyć aktualnego czasu? (tak/nie): ").strip().lower()
         if use_current_time in ['tak', 'nie']:
             break
         else:

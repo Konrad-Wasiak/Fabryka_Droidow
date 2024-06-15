@@ -1,8 +1,1 @@
 Time,Message
-2024-06-14 20:59:13,Niepoprawny wiersz w pliku CSV: []
-2024-06-14 20:59:15,Wczytano 3 batchy z pliku CSV.
-2024-06-14 20:59:17,"Batch: oddzial_1, ilość droidów: 105, umiejętności: spryt, wersja oprogramowania: 1beta, rodzaj klasy: defender, kolor: zolty"
-2024-06-14 20:59:19,"Batch: dywizja_5, ilość droidów: 250, umiejętności: walka, inteligencja, wersja oprogramowania: 5gamma, rodzaj klasy: attacker, kolor: czarny"
-2024-06-14 20:59:21,"Batch: pancerz_23, ilość droidów: 232, umiejętności: bieganie, wersja oprogramowania: 123, rodzaj klasy: attacker, kolor: czarny"
-2024-06-14 20:59:29,Błąd: Numer produkcji powinien być liczbą całkowitą.. Spróbuj ponownie.
-2024-06-14 20:59:45,Błąd: Wersja oprogramowania powinna składać się z liter i cyfr bez znaków specjalnych.. Spróbuj ponownie.

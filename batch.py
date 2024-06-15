@@ -84,7 +84,6 @@ class Batch:
             cls.zapisz_do_csv(nowy_batch)
 
             print(f"Batch został dodany do bazy danych.")
-            log_message(f"Batch został dodany do bazy danych.")
 
             return nowy_batch
         except ValueError as e:
@@ -103,7 +102,7 @@ class Batch:
                 batch.kolor
             ])
         print(f"Zapisano batch {batch.nazwa} do pliku CSV.")
-        log_message(f"Zapisano batch {batch.nazwa} do pliku CSV.")
+        log_message(f"Zapisano batch {batch.nazwa} do pliku CSV i dodano go do bazy danych.")
 
     @staticmethod
     def wczytaj_z_csv():
@@ -111,6 +110,8 @@ class Batch:
         try:
             with open('batche.csv', mode='r') as file:
                 reader = csv.reader(file)
+                # Pomijanie pierwszego wiersza z nazwami atrybutów.
+                next(reader)
                 for row in reader:
                     if len(row) != 6:
                         print(f"Niepoprawny wiersz w pliku CSV: {row}")
@@ -140,21 +141,3 @@ class Batch:
         print(f"Wczytano {len(batchy)} batchy z pliku CSV.")
         log_message(f"Wczytano {len(batchy)} batchy z pliku CSV.")
         return batchy
-
-    @staticmethod
-    def pokaz_magazyn():
-        batchy = Batch.wczytaj_z_csv()
-        if not batchy:
-            print("Brak batchy w magazynie.")
-            return
-        data = {
-            "Nazwa": [batch.nazwa for batch in batchy],
-            "Ilość droidów": [batch.ilosc_droidow for batch in batchy],
-            "Umiejętności specjalne": [", ".join(batch.umiejetnosci_specjalne) for batch in batchy],
-            "Wersja oprogramowania": [batch.wersja_oprogramowania for batch in batchy],
-            "Rodzaj klasy": [batch.rodzaj_klasy for batch in batchy],
-            "Kolor": [batch.kolor for batch in batchy]
-        }
-        df = pd.DataFrame(data)
-        df.to_csv('magazyn.csv', index=False)
-        print(df)

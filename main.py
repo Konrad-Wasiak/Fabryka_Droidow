@@ -1,7 +1,7 @@
 import sys
+import pandas as pd
 from batch import Batch
 from log import log_message
-
 
 def wyswietl_menu():
     print("Wybierz opcję:")
@@ -56,14 +56,25 @@ def dodaj_do_logu():
     print("Wiadomość została dodana do logu.")
 
 
-def wyswietl_stan_magazynu(batchy):
-    if batchy:
-        for batch in batchy:
-            print(
-                f"Nazwa: {batch.nazwa}, Ilość droidów: {batch.ilosc_droidow}, Kolor: {batch.kolor}, Umiejętności: {batch.umiejetnosci_specjalne}, Wersja oprogramowania: {batch.wersja_oprogramowania}")
-    else:
-        print("Magazyn jest pusty.")
 
+def pokaz_magazyn():
+    batchy = Batch.wczytaj_z_csv()
+    if not batchy:
+        print("Brak batchy w magazynie.")
+        return
+    data = {
+        "Nazwa": [batch.nazwa for batch in batchy],
+        "Ilość droidów": [batch.ilosc_droidow for batch in batchy],
+        "Umiejętności specjalne": [", ".join(batch.umiejetnosci_specjalne) for batch in batchy],
+        "Wersja oprogramowania": [batch.wersja_oprogramowania for batch in batchy],
+        "Rodzaj klasy": [batch.rodzaj_klasy for batch in batchy],
+        "Kolor": [batch.kolor for batch in batchy]
+    }
+    df = pd.DataFrame(data)
+    df.to_csv('batche.csv', index=False)
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    print(df)
 
 def main():
     batchy = []
@@ -83,13 +94,13 @@ def main():
             elif wybor == '5':
                 dodaj_do_logu()
             elif wybor == '6':
-                wyswietl_stan_magazynu(batchy)
+                pokaz_magazyn()
             elif wybor == '7':
                 print("Dziękujemy za skorzystanie z aplikacji. Do widzenia!")
                 sys.exit()
             else:
                 print("Nieprawidłowy wybór, spróbuj ponownie.")
-        except:
+        except (ValueError, IndexError, AttributeError):
             continue
 
 
